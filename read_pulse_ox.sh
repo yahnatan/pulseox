@@ -1,7 +1,8 @@
 #!/bin/bash
-DEST_FILE=$1
-if [ ! -f $DEST_FILE -o ! -w $DEST_FILE ]; then 
-  echo "usage: read_pulse_ox <dest_file>"
+PULSE_OX_TTY=$1
+DEST_FILE=$2
+if [ -z "$PULSE_OX_TTY" -o -z "$DEST_FILE" ]; then 
+  echo "usage: read_pulse_ox <pulse_ox_tty_dev> <dest_file>"
   exit
 fi
-sudo cat /dev/ttyUSB0 >> $DEST_FILE
+sudo cat $PULSE_OX_TTY >> $DEST_FILE
