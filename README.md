@@ -26,7 +26,7 @@ If after hooking up the Rad8 to your computer, you don't see any output, see bel
 
 ```
 # set up your elasticsearch index (run this one time)
-$ ./create_index_and_mappings.sh my-kids-medical-data server-running-elasticsearch:9200
+$ ./create_index_and_mappings.sh my-childs-med-data server-running-elasticsearch:9200
 
 # after you've plugged in your pulse ox via a serial-to-USB cable
 $ ./read_pulse_ox.sh /dev/ttyUSB0 ~/data.out
@@ -34,6 +34,7 @@ $ ./read_pulse_ox.sh /dev/ttyUSB0 ~/data.out
 # start piping data to elasticsearch
 $ ./tail_log_file_and_curl.sh ~/data.out
 ```
+TODO: fill in instructions for how to set up Grafana to pull/display the data from elasticsearch.
 
 ## Tips/Troubleshooting:
 
