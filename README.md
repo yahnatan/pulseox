@@ -6,7 +6,9 @@ These scripts are pretty rough (e.g. a few assumptions, unnecessarily writing da
 
 ## Connecting to your Massimo Rad 8 pulse ox
 
-You will need a serial-to-USB cable. If you connect that cable between the Rad8 and your microcomputer, it should get mounted at /dev/ttyUSB0 (or similar).
+You will need a serial-to-USB cable. I used a Sabrent CB-DB9P USB 2.0 to Serial (9-Pin) DB-9 RS-232 Converter Cable. Keep in mind when you buy: I have heard reports of the serial end being too bulky preventing a good connection to the pulse ox serial port.
+
+If you connect that cable between the Rad8 and your microcomputer, it should get mounted at /dev/ttyUSB0 (or similar).
 
 ```
 $ cat /dev/ttyUSB0
