@@ -73,6 +73,7 @@ TODO: fill in instructions for how to set up Grafana to pull/display the data fr
     ```
     $ rmmod ehci_platform && modprobe ehci-platform
     ``` 
+- If data stops displaying properly in Grafana around the time of daylight savings time changes, going into the settings on your pulse ox (see above for Massimo Rad8 instructions) and changing the hour manually should bring things back into alignment.
 
 ## Credit where credit is due:
 
