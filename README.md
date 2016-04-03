@@ -38,7 +38,15 @@ $ ./tail_log_file_and_curl.sh ~/data.out
 ```
 ## Setting up Grafana:
 
-TODO: fill in instructions for how to set up Grafana to pull/display the data from elasticsearch.
+Follow the instructions for setting up Grafana -- currently at http://docs.grafana.org/install/.
+
+For your datasource, find/follow the instructions for elasticsearch.
+
+Once you've set up Grafana, go to the Grafana URL in your browser (probably something like http://192.168.1.5:3000, where the 192.168.1.5 is the IP address of the computer running Grafana). Click log in.
+
+Select Dashboards > Import and click the "Choose File" button under "Import File."
+
+Load up the sample-grafana-dashboard.json file I included with this project.
 
 ## Tips/Troubleshooting:
 
