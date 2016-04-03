@@ -1,4 +1,4 @@
-"Glue code" for reading stats off of a Massimo Rad 8 pulse oximeter and pushing them to elasticsearch
+"Glue code" for reading stats off of a Massimo Rad 8 pulse oximeter and pushing them to elasticsearch to view them in Grafana.
 
 ## Caveats:
 
@@ -85,10 +85,11 @@ Load up the sample-grafana-dashboard.json file I included with this project.
     ``` 
 - If data stops displaying properly in Grafana around the time of daylight savings time changes, going into the settings on your pulse ox (see above for Massimo Rad8 instructions) and changing the hour manually should bring things back into alignment.
 
-## Massimo alarm codes ##
+## Understanding the Massimo's ALARM codes ##
+
+From the Massimo Rad 8 User Manual (http://www.ontvep.ca/pdf/Masimo-Rad-8-User-Manual.pdf):
 
    ```
-   Source: http://www.ontvep.ca/pdf/Masimo-Rad-8-User-Manual.pdf
    Trend Data format
    The exceptions are displayed as a 3 digit, ASCII encoded, hexadecimal
    value. The binary bits of the hexadecimal value are encoded as follows:
@@ -108,6 +109,59 @@ Load up the sample-grafana-dashboard.json file I included with this project.
    SET mode. It requires a SET sensor and needs to acquire some
    clean data for this flag to be set
    ```
+
+Correlating the above exceptions to the actual ALARM or EXC codes from your Massimo Rad8 requires a little close reading and mathematical thinking. Let's look at some example data.
+
+Here is a sampling of over 2 million ALARM data points from over two months of collection from my son's Massimo Rad8:
+
+ALARM | # times appeared
+-----------|------------
+000 | 2 Mil
+020 | 56 K
+032 | 3 K
+010 | 2K
+012 | 1K
+ 030 | 726
+ 03a | 623
+ 038 | 184
+ 018 | 10
+ 01a | 9
+ 014  | 8
+ 034 | 1
+
+Based on these numbers, it makes sense that ALARM=000 means "Normal operation", aALARM=020 means "Sensor Off" (our most common alarm situation), and ALARM=010 would mean "Interference" (another seemingly common occurrence). However, values like 032, 03a, etc don't appear in the above table. What gives?
+
+Re-reading the description above, I note that it says "the binary bits of the hexadecimal value are encoded." Notice as well that each of the hex values in the table from the manual correspond to a single bit in an 12-digit binary string:
+
+ALARM | HEX | BINARY
+-----------|--------|------------
+Normal  | 000 | 0000 0000 0000
+No sensor  | 001 | 0000 0000 0001
+Defective   | 002 | 0000 0000 0010
+Low Perf  | 004 | 0000 0000 0100
+Pulse Search  | 008 | 0000 0000 1000
+Interference  | 010 | 0000 0001 0000
+
+And so on.
+
+The power of this scheme is that any combination of alarms can be represented in a single hexadecimal number, because any of the hexadecimal values in their table can be summed with any other values to create a totally unique sum. That unique sum can then be decomposed back into only one possible set of sums. For example:
+
+Example: | Sum | = | Code 1 | + | Code 2 | + | Code 3 | + | Code 4
+-----|----|----|----|----|----|----|----|----|---
+In HEX: | 03a | = | 020 | + | 010 | + | 008 | + | 002 
+In binary: | 0011 1010 | = | 0010 0000 | + | 0001 0000 | + | 0000 1000 | + | 0000 0010 
+
+(Note that I've dropped the leading 0000 from each of the binary values to keep the entries from wrapping. But check the math -- it works!)
+
+Using this approach, the other alarms from my son's data can be decoded as follows:
+
+ALARM | CODES | INTERPRETATION
+-----------|------------|--------
+032 | 020 + 010 + 002 | Sensor Off + Interference + Defective Sensor
+012 | 010 + 002 | Interference + Defective Sensor
+030 | 020 + 010 | Sensor Off + Interference
+03a | 020 + 010 + 008 + 002 | Sensor Off + Interference + Pulse Search + Defective Sensor
+038 | 020 + 010 + 008 | Sensor Off + Interference + Pulse Search
 
 ## Credit where credit is due:
 
