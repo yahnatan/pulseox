@@ -36,6 +36,8 @@ $ ./read_pulse_ox.sh /dev/ttyUSB0 ~/data.out
 # start piping data to elasticsearch
 $ ./tail_log_file_and_curl.sh ~/data.out
 ```
+## Setting up Grafana:
+
 TODO: fill in instructions for how to set up Grafana to pull/display the data from elasticsearch.
 
 ## Tips/Troubleshooting:
@@ -75,9 +77,35 @@ TODO: fill in instructions for how to set up Grafana to pull/display the data fr
     ``` 
 - If data stops displaying properly in Grafana around the time of daylight savings time changes, going into the settings on your pulse ox (see above for Massimo Rad8 instructions) and changing the hour manually should bring things back into alignment.
 
+## Massimo alarm codes ##
+
+   ```
+   Source: http://www.ontvep.ca/pdf/Masimo-Rad-8-User-Manual.pdf
+   Trend Data format
+   The exceptions are displayed as a 3 digit, ASCII encoded, hexadecimal
+   value. The binary bits of the hexadecimal value are encoded as follows:
+   000 = Normal operation; no exceptions
+   001 = No Sensor
+   002 = Defective Sensor
+   004 = Low Perfusion
+   008 = Pulse Search
+   010 = Interference
+   020 = Sensor Off
+   040 = Ambient Light
+   080 = Unrecognized Sensor
+   100 = reserved
+   200 = reserved
+   400 = Low Signal IQ
+   800 = Masimo SET. This flag means the algorithm is running in full
+   SET mode. It requires a SET sensor and needs to acquire some
+   clean data for this flag to be set
+   ```
+
 ## Credit where credit is due:
 
 Inspired by http://www.instructables.com/id/Pulse-Oximeter-Data-Capture-with-Raspberry-Pi/
+
+Massimo alarm codes from nmenon at https://github.com/nmenon/masimo-datacapture/blob/master/masimo-capture.py#L249
 
 View my setup at https://youtu.be/t2B6XVP6vvs
 
