@@ -1,5 +1,9 @@
 "Glue code" for reading stats off of a Massimo Rad 8 pulse oximeter and pushing them to elasticsearch to view them in Grafana.
 
+[![YouTube video showing my setup in action](https://img.youtube.com/vi/t2B6XVP6vvs/0.jpg)](https://www.youtube.com/watch?v=t2B6XVP6vvs)
+
+https://youtu.be/t2B6XVP6vvs
+
 ## Caveats:
 
 These scripts are pretty rough (e.g. a few assumptions, unnecessarily writing data to disk, not very resilient) and are more intended to serve as an example.
