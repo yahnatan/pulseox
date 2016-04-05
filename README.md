@@ -48,6 +48,11 @@ Select Dashboards > Import and click the "Choose File" button under "Import File
 
 Load up the sample-grafana-dashboard.json file I included with this project.
 
+
+***IMPORTANT:*** this dashboard is not an equivalent replacement for the Massimo Rad8 itself! The Rad 8 is a certified lifesaving medical device. Use this dashboard to extend visibility and tracking, but do not rely on it in the way you would depend on the Massimo itself, as it is not "failsafe" and could fail in any number of places (e.g the remote device reading the stats, the server hosting elasticsearch, elasticsearch itself, grafana, your web browser, or the web client).
+
+***ADDITIONAL CAVEAT:*** the "current" SPO2 and HR values in my sample dashboard are intended to match the values on the Massimo Rad 8 itself. Thus, they average over an 8-second period. However, they are actually on a two-minute delay. This is because I found that over time, they began to flicker and not appear (replaced by "--", the string I told Grafana to use for a null value). Since this phenomenon correlated to the amount of data in elasticsearch growing, I suspect that it has something to do with how I'm storing/retrieving that data. I hope to resolve this in the future, but for now, I have emphasized to all my son's caregivers that those numbers cannot be trusted as being "up to the second." (They are still useful though for quickly ascertaining from a distance where the SPO2 and HR curves arecurrently located on the y-axis.)
+
 ## Tips/Troubleshooting:
 
 - If, after hooking up the serial port of your Rad8 to your input device, you don't see any output from the pulseox at /dev/ttyUSB0 (or similar), you may need to change the setting on your Rad8 serial port output from the default value of ASCII 2 to ASCII 1. From the Masimo Rad8 User Manual (available online if you do a Google search):
@@ -162,6 +167,12 @@ ALARM | CODES | INTERPRETATION
 030 | 020 + 010 | Sensor Off + Interference
 03a | 020 + 010 + 008 + 002 | Sensor Off + Interference + Pulse Search + Defective Sensor
 038 | 020 + 010 + 008 | Sensor Off + Interference + Pulse Search
+
+## Additional tips: ##
+
+I am using https://github.com/rocketinventor/web-page-screensaver to bring the default medical monitoring dashboard up on the screen of the computer in my son's room. I also set one corner of the screen as a "hot corner" to activate the screensaver,so that any of my son's caregivers can quickly bring the Grafana monitoring dashboard back up.
+
+Currently our setup is only visible within our home network. However, another parent told me about http://www.no-ip.com -- a free service which sjould let me access our server from outside my home network.
 
 ## Credit where credit is due:
 
