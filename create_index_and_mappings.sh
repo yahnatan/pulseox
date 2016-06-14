@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 INDEXNAME=$1
 HOSTNAME_AND_PORT=$2
 
