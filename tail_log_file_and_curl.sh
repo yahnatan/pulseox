@@ -1,10 +1,9 @@
 #!/bin/bash
-LOGFILE=$1
 
-if [ -z $LOGFILE ]; then
-  echo "usage:  tail_log_file_and_curl.sh <logfile>"
-  exit
-fi
-
-while sleep 1; do tail -n 3 $LOGFILE | ./transform_pulse_ox_to_json_doc_for_es.sh | ./curl_docs_to_es.sh && echo ""; done;
-
+tail -n0 -F "$1" | while read LINE; do
+  ID=$(echo "$LINE" | sed 's/=/ /g' | awk '{print $1$2$4}' | sed 's/\///g' | sed 's/-//g' | sed 's/://g')
+  #echo $ID
+  JSON=$(echo "$LINE" | ./transform_pulse_ox_to_json_doc_for_es.sh)
+  #echo $JSON
+  curl -X PUT "http://192.168.1.6:9200/max-med-test/rad8/$ID" -d "$JSON"
+done
