@@ -164,7 +164,7 @@
           ],
           "thresholds": "0,90,92",
           "timeFrom": "8s",
-          "timeShift": "30s",
+          "timeShift": "45s",
           "title": "SPO2",
           "type": "singlestat",
           "valueFontSize": "200%",
@@ -178,7 +178,7 @@
           "valueName": "current"
         }
       ],
-      "title": "New row"
+      "title": "Blood-Oxygen Saturation"
     },
     {
       "collapse": false,
@@ -332,7 +332,7 @@
           ],
           "thresholds": "0,80,150",
           "timeFrom": "8s",
-          "timeShift": "30s",
+          "timeShift": "45s",
           "title": "HR",
           "type": "singlestat",
           "valueFontSize": "200%",
@@ -346,7 +346,175 @@
           "valueName": "avg"
         }
       ],
-      "title": "Row"
+      "title": "Heart Rate"
+    },
+    {
+      "collapse": true,
+      "editable": true,
+      "height": 275.6666259765625,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "Elasticsearch",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "id": 11,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 1,
+          "points": true,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 9.998722044728435,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "time",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "dsType": "elasticsearch",
+              "metrics": [
+                {
+                  "field": "PI",
+                  "id": "1",
+                  "meta": {},
+                  "pipelineAgg": "select metric",
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "refId": "A",
+              "timeField": "time"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Perfusion",
+          "tooltip": {
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ]
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": true,
+          "colors": [
+            "rgba(245, 126, 54, 0.9)",
+            "rgba(55, 177, 38, 0.89)",
+            "rgba(209, 32, 32, 0.97)"
+          ],
+          "datasource": "Elasticsearch",
+          "editable": true,
+          "error": false,
+          "format": "none",
+          "hideTimeOverride": true,
+          "id": 12,
+          "interval": null,
+          "isNew": true,
+          "links": [],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "span": 2.001277955271565,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "time",
+                  "id": "2",
+                  "settings": {
+                    "interval": "10s",
+                    "min_doc_count": 1
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "dsType": "elasticsearch",
+              "metrics": [
+                {
+                  "field": "PI",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "refId": "A",
+              "timeField": "time"
+            }
+          ],
+          "thresholds": "0,80,150",
+          "timeFrom": "8s",
+          "timeShift": "45s",
+          "title": "PI",
+          "type": "singlestat",
+          "valueFontSize": "200%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "--",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        }
+      ],
+      "title": "Perfusion"
     },
     {
       "collapse": false,
@@ -516,7 +684,7 @@
           "type": "table"
         }
       ],
-      "title": "New row"
+      "title": "Alarms and Desats"
     },
     {
       "collapse": false,
@@ -684,7 +852,7 @@
           "type": "table"
         }
       ],
-      "title": "New row"
+      "title": "Counts of Exceptions and Alarm"
     },
     {
       "collapse": true,
@@ -781,11 +949,11 @@
           ]
         }
       ],
-      "title": "New row"
+      "title": "Exceptions"
     }
   ],
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -822,6 +990,6 @@
   },
   "refresh": "5s",
   "schemaVersion": 8,
-  "version": 27,
+  "version": 35,
   "links": []
 }
