@@ -5,5 +5,5 @@ tail -n0 -F "$1" | while read LINE; do
   #echo $ID
   JSON=$(echo "$LINE" | ./transform_pulse_ox_to_json_doc_for_es.sh)
   #echo $JSON
-  curl -X PUT "http://192.168.1.6:9200/max-med-test/rad8/$ID" -d "$JSON"
+  curl --max-time 900 -X PUT "http://192.168.1.6:9200/max-med-test/rad8/$ID" -d "$JSON"
 done
