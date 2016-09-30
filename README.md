@@ -77,8 +77,7 @@ Load up the sample-grafana-dashboard.json file I included with this project.
     # Put your custom commands here that should be executed once
     # the system init finished. By default this file does nothing.
     cd /root/pulseox
-    /root/pulseox/read_pulse_ox.sh /dev/ttyUSB0 /root/pulseox/data.out &
-    /root/pulseox/tail_log_file_and_curl.sh /root/pulseox/data.out 192.168.1.6:9200
+    /root/pulseox/tail_log_file_and_curl.sh /dev/ttyUSB0 192.168.1.6:9200
     exit 0
     ```
 - You might need to change /bin/bash to point to /bin/ash if, for example, you're using an Onion Omega.
@@ -125,11 +124,11 @@ Here is a sampling of over 2 million ALARM data points from over two months of c
 
 ALARM | # times appeared
 -----------|------------
-000 | 2 Mil
-020 | 56 K
-032 | 3 K
-010 | 2K
-012 | 1K
+ 000 | 2 Mil
+ 020 | 56 K
+ 032 | 3 K
+ 010 | 2K
+ 012 | 1K
  030 | 726
  03a | 623
  038 | 184
