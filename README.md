@@ -185,6 +185,8 @@ Massimo alarm codes from nmenon at https://github.com/nmenon/masimo-datacapture/
 
 View my setup at https://youtu.be/t2B6XVP6vvs
 
+A quick intro to the Onion Omega for someone who doesn't have one: http://www.hanselman.com/blog/PlayingWithAnOnionOmegaIoTDeviceToShowLiveBloodSugarOnAnOLEDScreen.aspx (If you have an Onion Omega, I recommend the tutorials from Onion; they're pretty great!)
+
 Questions? Comments? Please contact me!
 
 
