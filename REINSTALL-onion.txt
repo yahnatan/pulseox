@@ -1,0 +1,6 @@
+REINSTALL INSTRUCTIONS FOR THE ONION (if the device gets wiped)
+1. Log on directly to onion wifi (as when originally configuring), change default root password, and configure to local wifi.
+2. Run 'opkg update' and 'opkg install curl'
+3. Update /etc/rc.local and crontab with settings listed in README.
+4. Modify /etc/rc.button/reset to increase the amount of time you need to hold down the reset button to do a factory reset (i.e. change the line ```elif [ "$SEEN" -gt 5 ]``` to replace the number 5 with whatever number of seconds you're comfortable with]
+5. Reboot the onion (to let the new rc.local take effect and start reading/sending stats)
