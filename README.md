@@ -4,9 +4,21 @@
 
 https://youtu.be/t2B6XVP6vvs
 
-## Caveats:
+## Background:
+This writeup mostly assumes basic familiarity with Linux. If you haven't worked with Linux before, you might want to find a friend who has. (I'm happy to answer questions as I have time...reach me at twitter.com/yahnatan.)
 
-These scripts are pretty rough (e.g. a few assumptions, unnecessarily writing data to disk, not very resilient) and are more intended to serve as an example.
+## Materials:
+
+- one Massimo Rad8 pulse oximeter with 9-pin serial port on the back
+- one microcomputer (Onion Omega2, Raspberry Pi 3, BeagleBone Black, or another Linux-based microcomputer with wifi, preferably with battery-powered option)
+- one serial-to-USB cable (I used a Sabrent CB-DB9P USB 2.0 to Serial 9-Pin DB-9 RS-232 Converter Cable) which you will connect from the serial out port on your Massimo Rad8 to the microcomputer
+- one regular computer (Windows, Linux, or Mac) which stays running on your home network all the time to act as the "server"; onto it you will install some free database and visualization software which will then be viewable from any device on your home network with a web browser.
+
+## Caveats and tips:
+
+- These scripts are pretty rough (e.g. a few assumptions, unnecessarily writing data to disk, not very resilient) and are more intended to serve as an example.
+
+- If you're also thinking about experimenting with home automation (something I highly recommend for people w/neuromuscular disabilities), I recommend considering Samsung SmartThings, as its open API makes it easier to connect custom devices. I have a Samsung device driver for the Massimo Rad8 which allows us to connect my son's pulse ox to our home automation system for extra visibility (and hopefully, eventually, device triggers / rules like "blink lights if he's asleep and heart rate goes above 140").
 
 ## Connecting to your Massimo Rad 8 pulse ox
 
