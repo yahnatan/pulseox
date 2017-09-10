@@ -83,6 +83,8 @@ Load up the sample-grafana-dashboard.json file I included with this project.
 
     ***IMPORTANT:*** your child's pulse oximeter is a life-saving device. If you change the wrong setting inadvertently, you could seriously compromise the safety of your child and/or make yourself totally liable for the consequences. Don't change settings unless you're confident you know what you're doing.
 
+- If after changing your Massimo Rad 8 to AS1 setting, you still don't see data coming in when you call ```cat /dev/ttyUSB0``` (or wherever your serial-to-USB cable mounts to), it may be because the data is being buffered in Unix pipes. This is something that can be manipulated (and in issue #1 in this project there is an example of how to do this in Python).
+
 - You will want to make these scripts run automatically at startup. On my Onion Omega, I did this by adding the following to /etc/rc.local:
 
     ```
